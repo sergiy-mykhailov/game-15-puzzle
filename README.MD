@@ -25,7 +25,7 @@ or use any css-selector:
  ```
   var fifteenPuzzle = new FifteenPuzzle('.some-class');  // append in class .some-class
  ```
-####Description:
+#### Description:
  ```
   new FifteenPuzzle( [selector], [options]); 
  ```
