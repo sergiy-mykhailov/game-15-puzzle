@@ -1,0 +1,35 @@
+{
+  "name": "fifteen-puzzle",
+  "version": "0.0.5",
+  "description": "game 15-puzzle",
+  "main": "app.js",
+  "scripts": {
+    "test": " ",
+    "build": "npm install && webpack -p",
+    "start": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergiy-mykhailov/game-15-puzzle.git"
+  },
+  "keywords": [
+    "game",
+    "15-puzzle",
+    "puzzle",
+    "gem puzzle",
+    "boss puzzle",
+    "game of fifteen"
+  ],
+  "author": "Sergiy Mykhailov",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergiy-mykhailov/game-15-puzzle/issues"
+  },
+  "homepage": "https://github.com/sergiy-mykhailov/game-15-puzzle#readme",
+  "dependencies": {
+    "jquery": "^2.1.4"
+  },
+  "devDependencies": {
+    "webpack": "^3.4.1"
+  }
+}
