@@ -1,6 +1,6 @@
 {
   "name": "fifteen-puzzle",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "game 15-puzzle",
   "main": "app.js",
   "scripts": {
@@ -15,6 +15,11 @@
   "keywords": [
     "game",
     "15-puzzle",
+    "15 puzzle",
+    "game 15 puzzle",
+    "fifteen-puzzle",
+    "fifteen puzzle",
+    "game fifteen puzzle",
     "puzzle",
     "gem puzzle",
     "boss puzzle",
