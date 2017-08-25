@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import  './Controls.css';
+
 class Controls extends React.Component {
     constructor(props) {
         super(props);
@@ -10,7 +12,7 @@ class Controls extends React.Component {
 
     getWinsNumber() {
         if (this.props.playedGames.length === 0) return 0;
-        let arr =this.props.playedGames.filter((item) => {
+        let arr = this.props.playedGames.filter((item) => {
            return (!!item.win);
         });
         return arr.length;
@@ -18,43 +20,45 @@ class Controls extends React.Component {
 
     render() {
         return (
-            <div className="">
-                {this.props.isStarted
-                    ? <button
-                        type="button"
-                        className="btn btn-outline-info"
-                        onClick={this.props.onReset}
-                        data-toggle="modal" data-target=".modal-question"
-                    >
-                        Reset
-                    </button>
-                    : <button
-                        type="button"
-                        className="btn btn-outline-success"
-                        onClick={this.props.onStart}
-                    >
-                        Start
-                    </button>
-                }
+            <div className="row">
+                <div className="game-control col-2 px-2">
+                    {this.props.isStarted
+                        ? <button
+                            type="button"
+                            className="btn btn-outline-info"
+                            onClick={this.props.onReset}
+                            data-toggle="modal" data-target="#modal-reset"
+                        >
+                            Reset
+                        </button>
+                        : <button
+                            type="button"
+                            className="btn btn-outline-success"
+                            onClick={this.props.onStart}
+                        >
+                            Start
+                        </button>
+                    }
+                </div>
 
-                <div className="game-info float-right mt-1">
-                    <span className="h5 text-primary">
-                        Score:
-                        <span className="badge badge-pill badge-warning">
-                            {this.props.score}
-                        </span>
-                        &#160; Level:
-                        <span className="badge badge-pill badge-warning">
-                            {this.props.level}
-                        </span>
-                    </span>
+                <div className="game-info col-10 px-2">
+                    <div className="row">
+                        <div className="col-6 text-primary text-right px-1">
+                            Score:&#160;
+                            <span className="badge badge-pill badge-warning">
+                                {this.props.score}
+                            </span>
+                            &#160; Level:&#160;
+                            <span className="badge badge-pill badge-warning">
+                                {this.props.level}
+                            </span>
+                        </div>
 
-                    <span className="text-secondary">
-                        <small>
-                            &#160; Played games: {this.props.playedGames.length}
+                        <div className="col-6 text-secondary text-left px-1">
+                            Played games: {this.props.playedGames.length}
                             &#160;( wins: {this.getWinsNumber()} )
-                        </small>
-                    </span>
+                        </div>
+                    </div>
                 </div>
             </div>
         );

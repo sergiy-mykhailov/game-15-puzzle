@@ -1,0 +1,45 @@
+
+.game-info .text-primary,
+.game-info .text-secondary {
+    font-size: 0.75rem;
+}
+
+ /* media */
+@media (max-width: 499px) {
+    .game-info .text-primary,
+    .game-info .text-secondary {
+        max-width: 100%;
+        flex: 0 0 100%;
+        left: 25%;
+    }
+    .game-info .text-primary {
+        text-align: left !important;
+    }
+    .game-control button {
+        font-size: 0.75rem;
+    }
+}
+@media (min-width: 250px) and (max-width: 349px) {
+    .game-info .text-primary,
+    .game-info .text-secondary  {
+        left: 15%;
+    }
+}
+@media (min-width: 350px) and (max-width: 499px) {
+    .game-info .text-primary,
+    .game-info .text-secondary  {
+        font-size: 1rem;
+        left: 10%;
+    }
+    .game-control button {
+        font-size: 1rem;
+    }
+}
+@media (min-width: 500px) {
+    .game-info .text-primary {
+        font-size: 1.25rem;
+    }
+    .game-info .text-secondary {
+        font-size: 1rem;
+    }
+}

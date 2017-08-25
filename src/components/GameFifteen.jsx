@@ -16,7 +16,7 @@ class GameFifteen extends React.Component {
             positionsArray:     [],
             queue:              [],
             unitSize:           25,
-            stepLevel:          5,
+            stepLevel:          2,
             isStarted:          false,
             isResetting:        false,
             saves:              this.getEmptySaves(),
@@ -28,6 +28,7 @@ class GameFifteen extends React.Component {
         this.getPositions       = this.getPositions.bind(this);
         this.getEmptySaves      = this.getEmptySaves.bind(this);
         this.saveResults        = this.saveResults.bind(this);
+        this.getResults         = this.getResults.bind(this);
 
         this.getCurrentCoordinates  = this.getCurrentCoordinates.bind(this);
         this.getNewCoordinates      = this.getNewCoordinates.bind(this);
@@ -42,6 +43,7 @@ class GameFifteen extends React.Component {
         this.checkForVictory        = this.checkForVictory.bind(this);
         this.resetGame              = this.resetGame.bind(this);
 
+        this.handleBtnStart         = this.handleBtnStart.bind(this);
         this.handleStart            = this.handleStart.bind(this);
         this.handleReset            = this.handleReset.bind(this);
         this.handleUnitClick        = this.handleUnitClick.bind(this);
@@ -51,17 +53,7 @@ class GameFifteen extends React.Component {
 
     componentWillMount() {
 
-        let saves = JSON.parse(localStorage.getItem('game-15-puzzle'));
-        if (!saves) {
-            saves = this.getEmptySaves();
-            localStorage.setItem('game-15-puzzle', JSON.stringify(saves));
-        }
-
-        let level = (saves.currentLevel === 0) ? this.state.stepLevel : saves.currentLevel;
-
         this.setState({
-            saves:          saves,
-            level:          level,
             positionsArray: this.getPositions(this.state.gameArray)
         });
     }
@@ -71,6 +63,40 @@ class GameFifteen extends React.Component {
         this.saveResults(!this.state.isStarted);
     }
 
+    getResults() {
+
+        let saves = JSON.parse(localStorage.getItem('game-15-puzzle'));
+        if (!saves) {
+            saves = this.getEmptySaves();
+            localStorage.setItem('game-15-puzzle', JSON.stringify(saves));
+        }
+
+        const level = (saves.currentLevel === 0) ? this.state.stepLevel : saves.currentLevel;
+
+        this.setState({
+            saves:          saves,
+            level:          level,
+        });
+    }
+
+    saveResults(win) {
+
+        let saves = this.state.saves;
+
+        if (saves.currentLevel === 0) saves.currentLevel = this.state.stepLevel;
+        if (win) saves.currentLevel += this.state.stepLevel;
+
+        if (this.state.score !== 0) {
+            saves.playedGames.push({
+                level:  this.state.level,
+                score:  this.state.score,
+                win:    win
+            });
+        }
+
+        localStorage.setItem('game-15-puzzle', JSON.stringify(saves));
+    }
+
     getNewGameArray() {
         return [[0,1,2,3], [4,5,6,7], [8,9,10,11], [12,13,14,15]];
     }
@@ -78,6 +104,11 @@ class GameFifteen extends React.Component {
     getEmptySaves() {
         return { currentLevel: 0, playedGames: [] };
     }
+
+    randomInRange(start, finish){
+        return Math.floor(( Math.random() * (finish - start + 1) ) + start);
+    }
+
 
     getPositions(gameArray) {
         const unitSize = this.state.unitSize;
@@ -109,33 +140,6 @@ class GameFifteen extends React.Component {
         }
 
         return coordinates;
-    }
-
-    getAdjacentUnits(currentC, filterFunc) {
-        let arr = [];
-
-        arr.push({ direction: "left",   x: (currentC.x - 1), y: currentC.y });
-        arr.push({ direction: "right",  x: (currentC.x + 1), y: currentC.y });
-        arr.push({ direction: "up",     x: currentC.x,       y: (currentC.y - 1) });
-        arr.push({ direction: "down",   x: currentC.x,       y: (currentC.y + 1) });
-
-        return arr.filter((item) => {
-
-            const itemInRange = ((0 <= item.x) && (item.x < this.state.gameArray.length)
-                && (0 <= item.y) && (item.y < this.state.gameArray.length));
-
-            switch (filterFunc) {
-                case "zeroFilter":
-                    return itemInRange && (this.state.gameArray[item.y][item.x] === 0);
-                    break;
-                case "notZeroFilter":
-                    return itemInRange && (this.state.gameArray[item.y][item.x] !== 0);
-                    break;
-                default:
-                    return;
-            }
-
-        });
     }
 
     getNewCoordinates(currentC) {
@@ -202,8 +206,31 @@ class GameFifteen extends React.Component {
         });
     }
 
-    randomInRange(start, finish){
-        return Math.floor(( Math.random() * (finish - start + 1) ) + start);
+    getAdjacentUnits(currentC, filterFunc) {
+        let arr = [];
+
+        arr.push({ direction: "left",   x: (currentC.x - 1), y: currentC.y });
+        arr.push({ direction: "right",  x: (currentC.x + 1), y: currentC.y });
+        arr.push({ direction: "up",     x: currentC.x,       y: (currentC.y - 1) });
+        arr.push({ direction: "down",   x: currentC.x,       y: (currentC.y + 1) });
+
+        return arr.filter((item) => {
+
+            const itemInRange = ((0 <= item.x) && (item.x < this.state.gameArray.length)
+                && (0 <= item.y) && (item.y < this.state.gameArray.length));
+
+            switch (filterFunc) {
+                case "zeroFilter":
+                    return itemInRange && (this.state.gameArray[item.y][item.x] === 0);
+                    break;
+                case "notZeroFilter":
+                    return itemInRange && (this.state.gameArray[item.y][item.x] !== 0);
+                    break;
+                default:
+                    return;
+            }
+
+        });
     }
 
     getRandomUnitId(adjacentUnits, lastId){
@@ -226,6 +253,7 @@ class GameFifteen extends React.Component {
 
         return randomId;
     }
+
 
     mixUnits() {
 
@@ -290,22 +318,6 @@ class GameFifteen extends React.Component {
         }, 300);
     }
 
-    saveResults(win) {
-
-        let saves = this.state.saves;
-
-        if (win) saves.currentLevel += this.state.stepLevel;
-
-        saves.playedGames.push({
-            level:  this.state.level,
-            score:  this.state.score,
-            win:    win
-        });
-
-        localStorage.setItem('game-15-puzzle', JSON.stringify(saves));
-
-        console.log(JSON.stringify(saves));
-    }
 
     handleUnitClick(id) {
 
@@ -328,12 +340,27 @@ class GameFifteen extends React.Component {
         this.changePositions();
     }
 
-    handleStart() {
+    handleBtnStart() {
 
-        // TODO: add Modal components for chose level
+        this.getResults();
+
+        $('#modal-start').modal('show');
+
+    }
+
+    handleStart(inputText) {
+        if (!inputText) return;
+
+        const reg = /\d+/g;
+        const levelTxt = inputText.match(reg);
+        if (!levelTxt) return;
+
+        const level = Number(levelTxt);
+        if (isNaN(level) || level === 0) return;
 
         this.setState({
-            isStarted: true
+            isStarted:  true,
+            level:      level
         });
 
         setTimeout(() => {
@@ -360,20 +387,24 @@ class GameFifteen extends React.Component {
     }
 
     render() {
+        let styleProgress = { width: '75%', height: '1px' };
+        setTimeout(() => {
+            styleProgress = { width: '100%', height: '1px' };
+        },1);
         return (
             <div className="row">
                 <div className="card bg-light border-primary col-xs-12 col-sm-11 col-md-8 col-lg-6 col-xl-5 p-0" >
                     <div className="card-header">
                         <Controls
                             isStarted={this.state.isStarted}
-                            onStart={this.handleStart}
                             level={this.state.level}
                             playedGames={this.state.saves.playedGames}
                             score={this.state.score}
+                            onStart={this.handleBtnStart}
                         />
                     </div>
 
-                    <div className="card-body p-0 " ref="cardBody">
+                    <div className="card-body p-0 ">
                         <GameField
                             isStarted={this.state.isStarted}
                             positionsArray={this.state.positionsArray}
@@ -384,9 +415,20 @@ class GameFifteen extends React.Component {
                 </div>
 
                 <ModalQuestion
+                    id="modal-reset"
                     title="Reset game"
                     text="Do you really want to reset the game? :("
                     onYes={this.handleReset}
+                    enableInput={false}
+                />
+                <ModalQuestion
+                    id="modal-start"
+                    title="Start game"
+                    text="Select level of the game:"
+                    onYes={this.handleStart}
+                    enableInput={true}
+                    labelInput="Level:"
+                    textInput={String(this.state.level)}
                 />
                 <ModalVictory
                     title="You win ! ! ! !"
@@ -397,12 +439,9 @@ class GameFifteen extends React.Component {
     }
 }
 
-// GameFifteen.propTypes = {
-//     router: PropTypes.object.isRequired
-// };
+GameFifteen.propTypes = {
+};
 
 export default GameFifteen;
 
-
-// TODO: on START add Modal for chose level
-// TODO: progressbar on open
+// TODO: progressbar
