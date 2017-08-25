@@ -1,0 +1,11 @@
+
+.main-font {
+    font-family: "Sporedom", sans-serif;
+}
+
+/* fonts */
+@font-face {
+    font-family: Sporedom;
+    src: url(../fonts/Sporedom.ttf);
+}
+
