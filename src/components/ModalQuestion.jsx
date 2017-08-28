@@ -2,6 +2,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import  './ModalQuestion.css';
+
 class ModalQuestion extends React.Component {
     constructor(props) {
         super(props);
@@ -44,7 +46,7 @@ class ModalQuestion extends React.Component {
     render() {
         return (
             <div className="modal fade" id={this.props.id} role="dialog" >
-                <div className="modal-dialog" role="document">
+                <div className="modal-dialog modal-lg" role="document">
                     <div className="modal-content">
 
                         <div className="modal-header">

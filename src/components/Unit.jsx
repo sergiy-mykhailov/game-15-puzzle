@@ -8,14 +8,16 @@ import  './GameFonts.css';
 class Unit extends React.Component {
     constructor(props) {
         super(props);
-        this._getUnitClassName = this._getUnitClassName.bind(this);
+        this._getUnitClassName  = this._getUnitClassName.bind(this);
+        this.handleClick        = this.handleClick.bind(this);
     }
 
     _getUnitClassName() {
-        let className = '';
-        className += (this.props.id === 0) ? ' invisible' : '';
-        className += (this.props.isStarted) ? '' : ' disabled';
-        return className;
+        return (this.props.id === 0) ? ' invisible' : '';
+    }
+
+    handleClick() {
+        if (this.props.isStarted) this.props.onClick(this.props.id);
     }
 
     render() {
@@ -31,12 +33,25 @@ class Unit extends React.Component {
             >
                 <div className="unit-inner">
                     <div className="unit-content">
-                        <button
-                            type="button"
-                            onClick={ this.props.onClick.bind(null, this.props.id)}
-                            className={"btn btn-outline-primary w-100 h-100 main-font" + this._getUnitClassName()}>
-                            {this.props.title}
-                        </button>
+                        {(this.props.isStarted)
+
+                            ? <button
+                                type="button"
+                                onClick={ this.handleClick}
+                                className={"btn btn-outline-primary w-100 h-100 main-font" +
+                                    this._getUnitClassName()}>
+                                {this.props.title}
+                            </button>
+
+                            : <button
+                                type="button"
+                                onClick={ this.handleClick}
+                                disabled
+                                className={"btn btn-outline-primary w-100 h-100 main-font disabled" +
+                                    this._getUnitClassName()}>
+                                {this.props.title}
+                            </button>
+                        }
                     </div>
                 </div>
 

@@ -7,6 +7,8 @@ import GameField from './GameField.jsx';
 import ModalQuestion from './ModalQuestion.jsx';
 import ModalVictory from './ModalVictory.jsx';
 
+import  './GameFifteen.css';
+
 class GameFifteen extends React.Component {
     constructor(props) {
         super(props);
@@ -387,53 +389,56 @@ class GameFifteen extends React.Component {
     }
 
     render() {
-        let styleProgress = { width: '75%', height: '1px' };
-        setTimeout(() => {
-            styleProgress = { width: '100%', height: '1px' };
-        },1);
+        // let styleProgress = { width: '75%', height: '1px' };
+        // setTimeout(() => {
+        //     styleProgress = { width: '100%', height: '1px' };
+        // },1);
         return (
             <div className="row">
-                <div className="card bg-light border-primary col-xs-12 col-sm-11 col-md-8 col-lg-6 col-xl-5 p-0" >
-                    <div className="card-header">
-                        <Controls
-                            isStarted={this.state.isStarted}
-                            level={this.state.level}
-                            playedGames={this.state.saves.playedGames}
-                            score={this.state.score}
-                            onStart={this.handleBtnStart}
-                        />
+                <div className="game-container p-0 mx-auto">
+
+                    <div className="card bg-light border-primary" >
+                        <div className="card-header">
+                            <Controls
+                                isStarted={this.state.isStarted}
+                                level={this.state.level}
+                                playedGames={this.state.saves.playedGames}
+                                score={this.state.score}
+                                onStart={this.handleBtnStart}
+                            />
+                        </div>
+
+                        <div className="card-body p-0 ">
+                            <GameField
+                                isStarted={this.state.isStarted}
+                                positionsArray={this.state.positionsArray}
+                                onClick={this.handleUnitClick}
+                                onTransitionEnd={this.handleTransitionEnd}
+                            />
+                        </div>
                     </div>
 
-                    <div className="card-body p-0 ">
-                        <GameField
-                            isStarted={this.state.isStarted}
-                            positionsArray={this.state.positionsArray}
-                            onClick={this.handleUnitClick}
-                            onTransitionEnd={this.handleTransitionEnd}
-                        />
-                    </div>
+                    <ModalQuestion
+                        id="modal-reset"
+                        title="Reset game"
+                        text="Do you really want to reset the game? :("
+                        onYes={this.handleReset}
+                        enableInput={false}
+                    />
+                    <ModalQuestion
+                        id="modal-start"
+                        title="Start game"
+                        text="Select level of the game:"
+                        onYes={this.handleStart}
+                        enableInput={true}
+                        labelInput="Level:"
+                        textInput={String(this.state.level)}
+                    />
+                    <ModalVictory
+                        title="You win ! ! ! !"
+                    />
+
                 </div>
-
-                <ModalQuestion
-                    id="modal-reset"
-                    title="Reset game"
-                    text="Do you really want to reset the game? :("
-                    onYes={this.handleReset}
-                    enableInput={false}
-                />
-                <ModalQuestion
-                    id="modal-start"
-                    title="Start game"
-                    text="Select level of the game:"
-                    onYes={this.handleStart}
-                    enableInput={true}
-                    labelInput="Level:"
-                    textInput={String(this.state.level)}
-                />
-                <ModalVictory
-                    title="You win ! ! ! !"
-                />
-
             </div>
         );
     }

@@ -9,7 +9,7 @@ import GameFifteen from './components/GameFifteen.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 ReactDOM.render(
-    <div className="container mt-2">
+    <div className="container-fluid">
         <GameFifteen/>
     </div>,
     document.getElementById('fifteen-puzzle')

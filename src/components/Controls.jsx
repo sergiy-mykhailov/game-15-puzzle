@@ -21,11 +21,11 @@ class Controls extends React.Component {
     render() {
         return (
             <div className="row">
-                <div className="game-control col-2 px-2">
+                <div className="game-control col-3 px-2">
                     {this.props.isStarted
                         ? <button
                             type="button"
-                            className="btn btn-outline-info"
+                            className="btn btn-outline-info w-100"
                             onClick={this.props.onReset}
                             data-toggle="modal" data-target="#modal-reset"
                         >
@@ -33,7 +33,7 @@ class Controls extends React.Component {
                         </button>
                         : <button
                             type="button"
-                            className="btn btn-outline-success"
+                            className="btn btn-outline-success w-100"
                             onClick={this.props.onStart}
                         >
                             Start
@@ -41,22 +41,26 @@ class Controls extends React.Component {
                     }
                 </div>
 
-                <div className="game-info col-10 px-2">
+                <div className="game-info col-9 px-2">
                     <div className="row">
-                        <div className="col-6 text-primary text-right px-1">
-                            Score:&#160;
-                            <span className="badge badge-pill badge-warning">
-                                {this.props.score}
+                        <div className=" text-primary px-1">
+                            <span>
+                                Score:
+                                <span className="badge badge-pill badge-warning mx-1">
+                                    {this.props.score}
+                                </span>
                             </span>
-                            &#160; Level:&#160;
-                            <span className="badge badge-pill badge-warning">
-                                {this.props.level}
+                            <span>
+                                Level:
+                                <span className="badge badge-pill badge-warning mx-1">
+                                    {this.props.level}
+                                </span>
                             </span>
                         </div>
 
-                        <div className="col-6 text-secondary text-left px-1">
-                            Played games: {this.props.playedGames.length}
-                            &#160;( wins: {this.getWinsNumber()} )
+                        <div className=" text-secondary px-1 my-auto">
+                            <span>Played games: {this.props.playedGames.length}</span>
+                            <span className="mx-1">(wins: {this.getWinsNumber()})</span>
                         </div>
                     </div>
                 </div>

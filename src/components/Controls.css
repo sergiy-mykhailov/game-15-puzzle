@@ -1,45 +1,82 @@
 
 .game-info .text-primary,
 .game-info .text-secondary {
-    font-size: 0.75rem;
+    font-size: 0.5rem;
+    flex: 0 0 100%;
+    max-width: 100%;
+}
+.game-control button {
+    font-size: 0.5rem;
 }
 
  /* media */
-@media (max-width: 499px) {
-    .game-info .text-primary,
-    .game-info .text-secondary {
-        max-width: 100%;
-        flex: 0 0 100%;
-        left: 25%;
-    }
-    .game-info .text-primary {
-        text-align: left !important;
-    }
+@media screen and (min-width: 200px) and (min-height: 200px) {
     .game-control button {
         font-size: 0.75rem;
     }
-}
-@media (min-width: 250px) and (max-width: 349px) {
     .game-info .text-primary,
-    .game-info .text-secondary  {
-        left: 15%;
+    .game-info .text-secondary {
+        font-size: 0.75rem;
     }
 }
-@media (min-width: 350px) and (max-width: 499px) {
-    .game-info .text-primary,
-    .game-info .text-secondary  {
-        font-size: 1rem;
-        left: 10%;
-    }
+@media screen and (min-width: 400px) and (min-height: 400px) {
     .game-control button {
         font-size: 1rem;
     }
+    .game-info .text-primary {
+        font-size: 1rem;
+    }
 }
-@media (min-width: 500px) {
+@media screen and (min-width: 500px) and (min-height: 500px) {
+    .game-info .text-primary,
+    .game-info .text-secondary {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+}
+@media screen and (min-width: 600px) and (min-height: 600px) {
+    .game-control button {
+        font-size: 2rem;
+    }
     .game-info .text-primary {
         font-size: 1.25rem;
     }
     .game-info .text-secondary {
         font-size: 1rem;
+    }
+}
+@media screen and (min-width: 700px) and (min-height: 700px) {
+    .game-info .text-primary {
+        font-size: 1.5rem;
+    }
+}
+@media screen and (min-width: 800px) and (min-height: 800px) {
+    .game-control button {
+        font-size: 3rem;
+    }
+    .game-info .text-primary {
+        font-size: 1.75rem;
+    }
+    .game-info .text-secondary {
+        font-size: 1.25rem;
+    }
+}
+@media screen and (min-width: 900px) and (min-height: 900px) {
+    .game-info .text-primary {
+        font-size: 2rem;
+    }
+    .game-info .text-secondary {
+        font-size: 1.5rem;
+    }
+}
+@media screen and (min-width: 1000px) and (min-height: 1000px) {
+    .game-control button {
+        font-size: 4rem;
+    }
+    .game-info .text-primary {
+        font-size: 3rem;
+    }
+    .game-info .text-secondary {
+        font-size: 2rem;
     }
 }
