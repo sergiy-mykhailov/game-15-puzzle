@@ -8,16 +8,11 @@ import  './GameFonts.css';
 class Unit extends React.Component {
     constructor(props) {
         super(props);
-        this._getUnitClassName  = this._getUnitClassName.bind(this);
         this.handleClick        = this.handleClick.bind(this);
     }
 
-    _getUnitClassName() {
-        return (this.props.id === 0) ? ' invisible' : '';
-    }
-
     handleClick() {
-        if (this.props.isStarted) this.props.onClick(this.props.id);
+        if (this.props.isStarted && !this.props.isMixing) this.props.onClick(this.props.id);
     }
 
     render() {
@@ -33,13 +28,12 @@ class Unit extends React.Component {
             >
                 <div className="unit-inner">
                     <div className="unit-content">
-                        {(this.props.isStarted)
+                        {(this.props.isStarted && !this.props.isMixing)
 
                             ? <button
                                 type="button"
                                 onClick={ this.handleClick}
-                                className={"btn btn-outline-primary w-100 h-100 main-font" +
-                                    this._getUnitClassName()}>
+                                className="btn btn-outline-primary w-100 h-100 main-font">
                                 {this.props.title}
                             </button>
 
@@ -47,8 +41,7 @@ class Unit extends React.Component {
                                 type="button"
                                 onClick={ this.handleClick}
                                 disabled
-                                className={"btn btn-outline-primary w-100 h-100 main-font disabled" +
-                                    this._getUnitClassName()}>
+                                className="btn btn-outline-primary w-100 h-100 main-font disabled">
                                 {this.props.title}
                             </button>
                         }
@@ -63,6 +56,7 @@ class Unit extends React.Component {
 Unit.propTypes = {
     id:                 PropTypes.number.isRequired,
     isStarted:          PropTypes.bool.isRequired,
+    isMixing:           PropTypes.bool.isRequired,
     left:               PropTypes.number.isRequired,
     top:                PropTypes.number.isRequired,
     onTransitionEnd:    PropTypes.func.isRequired,

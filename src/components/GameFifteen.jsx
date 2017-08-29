@@ -20,7 +20,7 @@ class GameFifteen extends React.Component {
             unitSize:           25,
             stepLevel:          2,
             isStarted:          false,
-            isResetting:        false,
+            isMixing:           false,
             saves:              this.getEmptySaves(),
             level:              0,
             score:              0
@@ -61,7 +61,7 @@ class GameFifteen extends React.Component {
     }
 
     componentWillUnmount() {
-        // save results
+
         this.saveResults(!this.state.isStarted);
     }
 
@@ -113,14 +113,15 @@ class GameFifteen extends React.Component {
 
 
     getPositions(gameArray) {
+
         const unitSize = this.state.unitSize;
         let positionsArray = [];
 
         gameArray.forEach((arr, i) => {
-            let top = i * unitSize;
+            const top = i * unitSize;
 
             arr.forEach((item, j) => {
-               let left = j * unitSize;
+                const left = j * unitSize;
 
                 positionsArray[item] = { top, left };
 
@@ -134,7 +135,7 @@ class GameFifteen extends React.Component {
 
         for (let y = 0; y < this.state.gameArray.length; y++) {
 
-            let x = this.state.gameArray[y].indexOf(id);
+            const x = this.state.gameArray[y].indexOf(id);
             if (x === -1) continue;
 
             coordinates = { x, y } ;
@@ -146,7 +147,7 @@ class GameFifteen extends React.Component {
 
     getNewCoordinates(currentC) {
 
-        let adjacentUnits   = this.getAdjacentUnits(currentC, 'zeroFilter');
+        const adjacentUnits   = this.getAdjacentUnits(currentC, 'zeroFilter');
 
         return adjacentUnits.length === 0 ? null : adjacentUnits[0];
     }
@@ -191,7 +192,14 @@ class GameFifteen extends React.Component {
     }
 
     changePositions() {
-        if (this.state.queue.length === 0) return;
+        if (this.state.queue.length === 0) {
+            if (this.state.isStarted && this.state.isMixing) {
+                this.setState({
+                    isMixing:  false,
+                });
+            }
+            return;
+        }
 
         let queue           = this.state.queue;
         const newPosition   = queue[0];
@@ -257,13 +265,13 @@ class GameFifteen extends React.Component {
     }
 
 
-    mixUnits() {
+    mixUnits(level) {
 
         let posArray    = this.getPositions(this.state.gameArray);
         let queue       = this.state.queue;
         let id          = null;
 
-        for (let k = 1; k <= this.state.level; k++) {
+        for (let k = 1; k <= level; k++) {
 
             const currentCZero  = this.getCurrentCoordinates(0);
             const adjacentUnits = this.getAdjacentUnits(currentCZero, 'notZeroFilter');
@@ -294,9 +302,7 @@ class GameFifteen extends React.Component {
 
             $('.modal-victory').modal('show');
 
-            // save results
             this.saveResults(true);
-
             this.resetGame();
         }
     }
@@ -351,6 +357,7 @@ class GameFifteen extends React.Component {
     }
 
     handleStart(inputText) {
+
         if (!inputText) return;
 
         const reg = /\d+/g;
@@ -362,21 +369,17 @@ class GameFifteen extends React.Component {
 
         this.setState({
             isStarted:  true,
+            isMixing:   true,
             level:      level
         });
 
-        setTimeout(() => {
-            this.mixUnits();
-            this.changePositions();
-        }, 100);
-
+        this.mixUnits(level);
+        this.changePositions();
     }
 
     handleReset() {
 
-        // save results
         this.saveResults(false);
-
         this.resetGame();
     }
 
@@ -389,10 +392,6 @@ class GameFifteen extends React.Component {
     }
 
     render() {
-        // let styleProgress = { width: '75%', height: '1px' };
-        // setTimeout(() => {
-        //     styleProgress = { width: '100%', height: '1px' };
-        // },1);
         return (
             <div className="row">
                 <div className="game-container p-0 mx-auto">
@@ -411,6 +410,7 @@ class GameFifteen extends React.Component {
                         <div className="card-body p-0 ">
                             <GameField
                                 isStarted={this.state.isStarted}
+                                isMixing={this.state.isMixing}
                                 positionsArray={this.state.positionsArray}
                                 onClick={this.handleUnitClick}
                                 onTransitionEnd={this.handleTransitionEnd}
@@ -448,5 +448,3 @@ GameFifteen.propTypes = {
 };
 
 export default GameFifteen;
-
-// TODO: progressbar

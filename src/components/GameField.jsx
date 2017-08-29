@@ -26,6 +26,7 @@ class GameField extends React.Component {
                                     onClick={this.props.onClick}
                                     onTransitionEnd={this.props.onTransitionEnd}
                                     isStarted={this.props.isStarted}
+                                    isMixing={this.props.isMixing}
                                 />
                             );
                         })}
@@ -42,6 +43,7 @@ GameField.propTypes = {
     onClick:            PropTypes.func.isRequired,
     onTransitionEnd:    PropTypes.func.isRequired,
     isStarted:          PropTypes.bool.isRequired,
+    isMixing:           PropTypes.bool.isRequired
 };
 
 export default GameField;
