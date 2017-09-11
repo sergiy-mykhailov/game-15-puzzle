@@ -1,13 +1,10 @@
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Controls from './Controls.jsx';
 import GameField from './GameField.jsx';
 import ModalQuestion from './ModalQuestion.jsx';
 import ModalVictory from './ModalVictory.jsx';
-
-import  './GameFifteen.css';
 
 class GameFifteen extends React.Component {
     constructor(props) {
@@ -394,7 +391,7 @@ class GameFifteen extends React.Component {
     render() {
         return (
             <div className="row">
-                <div className="game-container p-0 mx-auto">
+                <div className="col-xs-12 col-sm-9 col-md-7 col-lg-6 col-xl-5 p-0 mx-auto game-container">
 
                     <div className="card bg-light border-primary" >
                         <div className="card-header">
@@ -443,8 +440,5 @@ class GameFifteen extends React.Component {
         );
     }
 }
-
-GameFifteen.propTypes = {
-};
 
 export default GameFifteen;

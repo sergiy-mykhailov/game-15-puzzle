@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import  './Unit.css';
-import  './GameFonts.css';
 
 class Unit extends React.Component {
     constructor(props) {
@@ -33,7 +32,7 @@ class Unit extends React.Component {
                             ? <button
                                 type="button"
                                 onClick={ this.handleClick}
-                                className="btn btn-outline-primary w-100 h-100 main-font">
+                                className="btn btn-outline-primary w-100 h-100">
                                 {this.props.title}
                             </button>
 
@@ -41,7 +40,7 @@ class Unit extends React.Component {
                                 type="button"
                                 onClick={ this.handleClick}
                                 disabled
-                                className="btn btn-outline-primary w-100 h-100 main-font disabled">
+                                className="btn btn-outline-primary w-100 h-100 disabled">
                                 {this.props.title}
                             </button>
                         }

@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import  './GameFonts.css';
+import  './Modal.css';
 
 class ModalVictory extends React.Component {
     render() {
@@ -13,7 +13,7 @@ class ModalVictory extends React.Component {
 
                         <div className="modal-header border-success">
                             <h1 className="display-4 modal-title text-center w-100">
-                                <span className="text-success main-font">
+                                <span className="text-success">
                                     {this.props.title}
                                 </span>
                             </h1>

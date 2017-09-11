@@ -18,57 +18,34 @@
 }
 
 .unit-content button {
-    font-size: 1rem;
+    font-size: 5vw;
+    font-family: "Sporedom", sans-serif;
 }
 
- /* media */
-@media screen and (min-width: 250px) and (min-height: 250px) {
+/* media */
+@media screen and (max-width: 575px) {
     .unit-content button {
-        font-size: 1.25rem;
+        font-size: 10vw;
     }
 }
-@media screen and (min-width: 300px) and (min-height: 300px) {
+@media screen and (min-width: 576px) {
     .unit-content button {
-        font-size: 1.5rem;
+        font-size: 7vw;
     }
 }
-@media screen and (min-width: 350px) and (min-height: 350px) {
+@media screen and (min-width: 768px) {
     .unit-content button {
-        font-size: 2rem;
+        font-size: 6vw;
     }
 }
-@media screen and (min-width: 400px) and (min-height: 400px) {
+@media screen and (min-width: 1200px) {
     .unit-content button {
-        font-size: 2.5rem;
+        font-size: 4vw;
     }
 }
-@media screen and (min-width: 500px) and (min-height: 500px) {
-    .unit-content button {
-        font-size: 3rem;
-    }
-}
-@media screen and (min-width: 600px) and (min-height: 600px) {
-    .unit-content button {
-        font-size: 4rem;
-    }
-}
-@media screen and (min-width: 700px) and (min-height: 700px) {
-    .unit-content button {
-        font-size: 5rem;
-    }
-}
-@media screen and (min-width: 800px) and (min-height: 800px) {
-    .unit-content button {
-        font-size: 6rem;
-    }
-}
-@media screen and (min-width: 900px) and (min-height: 900px) {
-    .unit-content button {
-        font-size: 7rem;
-    }
-}
-@media screen and (min-width: 1000px) and (min-height: 1000px) {
-    .unit-content button {
-        font-size: 8rem;
-    }
+
+/* fonts */
+@font-face {
+    font-family: Sporedom;
+    src: url(../fonts/Sporedom.ttf);
 }

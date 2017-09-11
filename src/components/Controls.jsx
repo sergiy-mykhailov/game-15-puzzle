@@ -2,8 +2,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import  './Controls.css';
-
 class Controls extends React.Component {
     constructor(props) {
         super(props);
@@ -43,7 +41,7 @@ class Controls extends React.Component {
 
                 <div className="game-info col-9 px-2">
                     <div className="row">
-                        <div className=" text-primary px-1">
+                        <div className="col-lg-6 col-sm-12 text-primary px-1">
                             <span>
                                 Score:
                                 <span className="badge badge-pill badge-warning mx-1">
@@ -58,7 +56,7 @@ class Controls extends React.Component {
                             </span>
                         </div>
 
-                        <div className=" text-secondary px-1 my-auto">
+                        <div className="col-lg-6  col-sm-12 text-secondary px-1 my-auto">
                             <span>Played games: {this.props.playedGames.length}</span>
                             <span className="mx-1">(wins: {this.getWinsNumber()})</span>
                         </div>

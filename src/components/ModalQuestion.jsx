@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import  './ModalQuestion.css';
+import  './Modal.css';
 
 class ModalQuestion extends React.Component {
     constructor(props) {

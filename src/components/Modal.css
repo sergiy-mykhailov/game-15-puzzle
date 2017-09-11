@@ -1,0 +1,69 @@
+
+.modal .modal-content .modal-title {
+    font-size: 6vw;
+}
+
+.modal .modal-content,
+.modal .modal-content input,
+.modal .modal-content span,
+.modal .modal-content button {
+    font-size: 5vw;
+}
+
+.modal .modal-content button {
+    padding-left: 5vw;
+    padding-right: 5vw;
+    margin-left: 5vw;
+}
+
+.modal-victory .modal-content .modal-title span {
+    font-size: 10vw;
+}
+
+/* media */
+@media screen and (min-width: 576px) {
+    .modal .modal-content .modal-title {
+        font-size: 5vw;
+    }
+    .modal .modal-content,
+    .modal .modal-content input,
+    .modal .modal-content span,
+    .modal .modal-content button {
+        font-size: 4vw;
+    }
+}
+@media screen and (min-width: 768px) {
+    .modal .modal-content .modal-title {
+        font-size: 4vw;
+    }
+    .modal .modal-content,
+    .modal .modal-content input,
+    .modal .modal-content span,
+    .modal .modal-content button {
+        font-size: 3vw;
+    }
+    .modal .modal-content button {
+        padding-left: 2vw;
+        padding-right: 2vw;
+        margin-left: 2vw;
+    }
+    .modal-victory .modal-content .modal-title span {
+        font-size: 8vw;
+    }
+}
+@media screen and (min-width: 992px) {
+    .modal .modal-content .modal-title {
+        font-size: 3vw;
+    }
+    .modal .modal-content,
+    .modal .modal-content input,
+    .modal .modal-content span,
+    .modal .modal-content button {
+        font-size: 2vw;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .modal-victory .modal-content .modal-title span {
+        font-size: 6vw;
+    }
+}
